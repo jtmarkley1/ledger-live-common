@@ -43,7 +43,9 @@ export async function buildOperation(arg: {
   const blockHeight = await coreOperation.getBlockHeight();
 
   const [recipients, senders] = await Promise.all([
-    coreOperation.getRecipients(),
+    type === "IN"
+      ? coreOperation.getSelfRecipients()
+      : coreOperation.getRecipients(),
     coreOperation.getSenders(),
   ]);
 
